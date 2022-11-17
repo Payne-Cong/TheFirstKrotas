@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package api.helloworld;
+
+import "google/api/annotations.proto";
+
+option go_package = "helloworld/api/helloworld;helloworld";
+option java_multiple_files = true;
+option java_package = "api.helloworld";
+
+service Demo {
+	rpc CreateDemo (CreateDemoRequest) returns (CreateDemoReply);
+	rpc UpdateDemo (UpdateDemoRequest) returns (UpdateDemoReply);
+	rpc DeleteDemo (DeleteDemoRequest) returns (DeleteDemoReply);
+	rpc GetDemo (GetDemoRequest) returns (GetDemoReply){
+		option (google.api.http) = {
+			get: "/hello"
+		};
+	};
+	rpc ListDemo (ListDemoRequest) returns (ListDemoReply);
+}
+
+enum Status {
+	SUCCESS = 0;
+	FAIL = 1;
+}
+
+message CreateDemoRequest {
+	int64 id = 1;
+	string name = 2;
+	string address = 3;
+}
+message CreateDemoReply {
+	Status status = 1;
+}
+
+message UpdateDemoRequest {}
+message UpdateDemoReply {}
+
+message DeleteDemoRequest {
+	int64 id = 1;
+}
+message DeleteDemoReply {
+	Status status = 1;
+}
+
+message GetDemoRequest {}
+message GetDemoReply {
+	string  res = 1;
+}
+
+message ListDemoRequest {}
+message ListDemoReply {}
