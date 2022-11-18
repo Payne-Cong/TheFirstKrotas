@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-http v2.5.3
 // - protoc             v3.21.6
-// source: helloworld/demo.proto
+// source: api/helloworld/v1/demo.proto
 
-package helloworld
+package v1
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationDemoGetDemo = "/api.helloworld.Demo/GetDemo"
+const OperationDemoGetDemo = "/helloworld.v1.Demo/GetDemo"
 
 type DemoHTTPServer interface {
 	GetDemo(context.Context, *GetDemoRequest) (*GetDemoReply, error)

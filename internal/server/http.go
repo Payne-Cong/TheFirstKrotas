@@ -1,7 +1,6 @@
 package server
 
 import (
-	"TheFirstKrotas/api/helloworld"
 	v1 "TheFirstKrotas/api/helloworld/v1"
 	"TheFirstKrotas/internal/conf"
 	"TheFirstKrotas/internal/service"
@@ -31,6 +30,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, demo *servic
 	v1.RegisterGreeterHTTPServer(srv, greeter)
 
 	// test
-	helloworld.RegisterDemoHTTPServer(srv, demo)
+	v1.RegisterDemoHTTPServer(srv, demo)
 	return srv
 }

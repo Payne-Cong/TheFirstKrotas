@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/helloworld/v1/demo.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Demo"
+    }
+  ],
+  "basePath": "/hello",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/hello": {
+      "get": {
+        "operationId": "Demo_GetDemo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDemoReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Demo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "helloworldv1Status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAIL"
+      ],
+      "default": "SUCCESS"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "v1CreateDemoReply": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/helloworldv1Status"
+        }
+      }
+    },
+    "v1DeleteDemoReply": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/helloworldv1Status"
+        }
+      }
+    },
+    "v1GetDemoReply": {
+      "type": "object",
+      "properties": {
+        "res": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ListDemoReply": {
+      "type": "object"
+    },
+    "v1UpdateDemoReply": {
+      "type": "object"
+    }
+  }
+}

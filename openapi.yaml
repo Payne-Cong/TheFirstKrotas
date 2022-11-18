@@ -17,7 +17,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.helloworld.GetDemoReply'
+                                $ref: '#/components/schemas/helloworld.v1.GetDemoReply'
     /say/{name}:
         get:
             tags:
@@ -39,7 +39,7 @@ paths:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
 components:
     schemas:
-        api.helloworld.GetDemoReply:
+        helloworld.v1.GetDemoReply:
             type: object
             properties:
                 res:

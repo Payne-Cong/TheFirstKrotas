@@ -1,7 +1,6 @@
 package server
 
 import (
-	"TheFirstKrotas/api/helloworld"
 	v1 "TheFirstKrotas/api/helloworld/v1"
 	"TheFirstKrotas/internal/conf"
 	"TheFirstKrotas/internal/service"
@@ -31,7 +30,7 @@ func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, demo *servic
 	v1.RegisterGreeterServer(srv, greeter)
 
 	// test
-	helloworld.RegisterDemoServer(srv, demo)
+	v1.RegisterDemoServer(srv, demo)
 
 	return srv
 }

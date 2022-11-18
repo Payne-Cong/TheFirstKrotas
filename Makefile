@@ -11,19 +11,22 @@ ifeq ($(GOHOSTOS), windows)
 	INTERNAL_PROTO_FILES=$(shell $(Git_Bash) -c "find internal -name *.proto")
 	API_PROTO_FILES=$(shell $(Git_Bash) -c "find api -name *.proto")
 else
-	INTERNAL_PROTO_FILES=$(shell find internal -name *.proto)
-	API_PROTO_FILES=$(shell find api -name *.proto)
+	INTERNAL_PROTO_FILES=$(shell find internal -name *.proto | grep -v target )
+	API_PROTO_FILES=$(shell find api -name *.proto | grep -v target)
 endif
 
 .PHONY: init
 # init env
 init:
+	go mod tidy
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
 	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
 	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
 	go install github.com/google/wire/cmd/wire@latest
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+
 
 .PHONY: config
 # generate internal proto
@@ -36,11 +39,11 @@ config:
 .PHONY: api
 # generate api proto
 api:
-	protoc --proto_path=./api \
+	protoc --proto_path=. \
 	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:./api \
- 	       --go-http_out=paths=source_relative:./api \
- 	       --go-grpc_out=paths=source_relative:./api \
+ 	       --go_out=paths=source_relative:. \
+ 	       --go-http_out=paths=source_relative:. \
+ 	       --go-grpc_out=paths=source_relative:. \
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
 
@@ -56,12 +59,26 @@ generate:
 	go get github.com/google/wire/cmd/wire@latest
 	go generate ./...
 
+
+.PHONY: swagger
+# generate swagger file
+swagger:
+	protoc --proto_path=. \
+		--proto_path=./third_party \
+		--openapiv2_out . \
+		--openapiv2_opt logtostderr=true \
+		--openapiv2_opt json_names_for_fields=false \
+		$(API_PROTO_FILES)
+
+
 .PHONY: all
 # generate all
 all:
 	make api;
 	make config;
+	make swagger;
 	make generate;
+
 
 # show help
 help:

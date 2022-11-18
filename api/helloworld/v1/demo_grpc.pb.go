@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.6
-// source: helloworld/demo.proto
+// source: api/helloworld/v1/demo.proto
 
-package helloworld
+package v1
 
 import (
 	context "context"
@@ -39,7 +39,7 @@ func NewDemoClient(cc grpc.ClientConnInterface) DemoClient {
 
 func (c *demoClient) CreateDemo(ctx context.Context, in *CreateDemoRequest, opts ...grpc.CallOption) (*CreateDemoReply, error) {
 	out := new(CreateDemoReply)
-	err := c.cc.Invoke(ctx, "/api.helloworld.Demo/CreateDemo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.Demo/CreateDemo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *demoClient) CreateDemo(ctx context.Context, in *CreateDemoRequest, opts
 
 func (c *demoClient) UpdateDemo(ctx context.Context, in *UpdateDemoRequest, opts ...grpc.CallOption) (*UpdateDemoReply, error) {
 	out := new(UpdateDemoReply)
-	err := c.cc.Invoke(ctx, "/api.helloworld.Demo/UpdateDemo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.Demo/UpdateDemo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *demoClient) UpdateDemo(ctx context.Context, in *UpdateDemoRequest, opts
 
 func (c *demoClient) DeleteDemo(ctx context.Context, in *DeleteDemoRequest, opts ...grpc.CallOption) (*DeleteDemoReply, error) {
 	out := new(DeleteDemoReply)
-	err := c.cc.Invoke(ctx, "/api.helloworld.Demo/DeleteDemo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.Demo/DeleteDemo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (c *demoClient) DeleteDemo(ctx context.Context, in *DeleteDemoRequest, opts
 
 func (c *demoClient) GetDemo(ctx context.Context, in *GetDemoRequest, opts ...grpc.CallOption) (*GetDemoReply, error) {
 	out := new(GetDemoReply)
-	err := c.cc.Invoke(ctx, "/api.helloworld.Demo/GetDemo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.Demo/GetDemo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c *demoClient) GetDemo(ctx context.Context, in *GetDemoRequest, opts ...gr
 
 func (c *demoClient) ListDemo(ctx context.Context, in *ListDemoRequest, opts ...grpc.CallOption) (*ListDemoReply, error) {
 	out := new(ListDemoReply)
-	err := c.cc.Invoke(ctx, "/api.helloworld.Demo/ListDemo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.v1.Demo/ListDemo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func _Demo_CreateDemo_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.helloworld.Demo/CreateDemo",
+		FullMethod: "/helloworld.v1.Demo/CreateDemo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DemoServer).CreateDemo(ctx, req.(*CreateDemoRequest))
@@ -154,7 +154,7 @@ func _Demo_UpdateDemo_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.helloworld.Demo/UpdateDemo",
+		FullMethod: "/helloworld.v1.Demo/UpdateDemo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DemoServer).UpdateDemo(ctx, req.(*UpdateDemoRequest))
@@ -172,7 +172,7 @@ func _Demo_DeleteDemo_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.helloworld.Demo/DeleteDemo",
+		FullMethod: "/helloworld.v1.Demo/DeleteDemo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DemoServer).DeleteDemo(ctx, req.(*DeleteDemoRequest))
@@ -190,7 +190,7 @@ func _Demo_GetDemo_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.helloworld.Demo/GetDemo",
+		FullMethod: "/helloworld.v1.Demo/GetDemo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DemoServer).GetDemo(ctx, req.(*GetDemoRequest))
@@ -208,7 +208,7 @@ func _Demo_ListDemo_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.helloworld.Demo/ListDemo",
+		FullMethod: "/helloworld.v1.Demo/ListDemo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DemoServer).ListDemo(ctx, req.(*ListDemoRequest))
@@ -220,7 +220,7 @@ func _Demo_ListDemo_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Demo_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.helloworld.Demo",
+	ServiceName: "helloworld.v1.Demo",
 	HandlerType: (*DemoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -245,5 +245,5 @@ var Demo_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "helloworld/demo.proto",
+	Metadata: "api/helloworld/v1/demo.proto",
 }
